@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bloglite</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Welcome {{ name }}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/dashboard/{{user_id}}/blog_page">Home</a></li>
+      <li><a href="/myprofile/{{user_id}}">My Profile</a></li>
+      <li><a href="/my_feed/{{user_id}}">My Feed</a></li>
+      <li><a href="/search/{{user_id}}?q=9999">My Blogs</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <!--<form class="navbar-form navbar-left" action="/action_page.php">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="search">
+        -->
+    <a href="/logout/{{user_id}}" class="btn btn-danger" role="button">Logout</a>
+    </ul>
+  </div>
+</nav>
+
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=Submit]:hover {
+      background-color: #45a049;
+    }
+    
+    .container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    </style>
+
+<centre><h3>Add a Blog/Post</h3></centre>
+
+<div class="container">
+  <form action="/dashboard/{{user_id}}/blog_upload" method="POST" id="blog_upload-form">
+    <label for="blog_name">Name</label>
+    <input type="text" id="blog_name" name="blog_name" placeholder="The title of your blog.." required />
+
+    <label for="Description">Caption/Description</label>
+    <textarea id="Description" name="Description" placeholder="Write something.." style="height:200px"></textarea>
+    <input type="file" id="myFile" name="image_path" required />
+    <br>
+   <button type="submit">Submit</button>
+  </form>
+</div>
+</body>
+</html>

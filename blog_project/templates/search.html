@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Welcome {{ name }}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/dashboard/{{user_id}}/blog_page">Home</a></li>
+      <li><a href="/myprofile/{{user_id}}">My Profile</a></li>
+      <li><a href="/your_blogs/{{user_id}}">My Blogs</a></li>
+      <li><a href="/my_feed/{{user_id}}">My Feed</a></li>
+      <li class="active"><a href="/search/{{user_id}}?q=9999">Search</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      
+    
+    <a href="/logout/{{user_id}}" class="btn btn-danger" role="button">Logout</a>
+    </ul>
+  </div>
+  
+</nav>
+<div style="text-align:center">
+<br>
+<br><h1>Search the username you want to search</h1>
+<br>
+</div>
+<div class="center">
+    <form class="navbar-form navbar-left" action="/search/{{user_id}}?">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search the username" name="q" required/>
+    </div>
+<br>
+<div class="container" >
+<ol>
+    {% for result in results %}
+        <br><br><li><a href='/userprofile/{{user_id}}/{{result.user_id}}'>{{result.name}}</a>            <a href="/follow/{{user_id}}/{{result.user_id}}" class="btn btn-primary" role="button">Follow</a>/<a href="/unfollow/{{user_id}}/{{result.user_id}}" class="btn btn-danger" role="button">Unfollow</a></li>
+    {% endfor %}
+</ol>
+</div>
+
+</body>
+<style>
+
+    
+ .center {
+  margin-top: 150px;
+  position: absolute;
+  top: 40%;
+  left: 70%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+} 
+
+</style>
+</html>

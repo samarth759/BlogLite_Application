@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bloglite</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Welcome {{ name }}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/dashboard/{{user_id}}/blog_page">Home</a></li>
+      <li><a href="/myprofile/{{user_id}}">My Profile</a></li>
+      <li><a href="/your_blogs/{{user_id}}">My Blogs</a></li>
+      <li><a href="/my_feed/{{user_id}}">My Feed</a></li>
+      <li><a href="/search/{{user_id}}?q=9999">Search</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <a href="/logout/{{user_id}}" class="btn btn-danger" role="button">Logout</a>
+    </ul>
+  </div>
+  
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Bloglite</h1>
+        
+    </div>
+<div style="text-align:center">
+    To add blogs : <a href="/dashboard/{{user_id}}/blog_upload" class="btn btn-success" role="button">Add blog</a>
+</div>
+    <br>
+    <br>
+    <div class="row">
+        {% for user in blogs %}
+        {% for i in blogs[user] %}
+        <div class="col-lg-4">
+            <div class="card" style="width: 360;">
+                <img class="card-img-top" src="/static/{{i.image_path}}" width="360" height="320"alt="Card image cap">
+                <div class="card-body">
+                  <h3 class="card-title">{{i.blog_name}}</h3>
+                  <h6 class="card-text">{{ i.description }}</h6>
+                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                  {% if user.user_id == user_id %}
+                        Blog Posted by- <a href='/your_blogs/{{user.user_id}}'>{{user.name}}</a> on {{i.timestamp}}
+                    {% else %}
+                        Blog Posted by- <a href='/user_blogs/{{user_id}}/{{user.user_id}}'>{{user.name}}</a> on {{i.timestamp}}
+                    {% endif %}
+                  <br>
+                  <br>
+                  <br>
+                </div>
+              </div>
+
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-8">
+            {% for user in blogs %}
+            
+                {% for i in blogs[user] %}
+                     <h2>{{i.blog_name}}</h2>
+                     <br>
+                    {% if user.user_id == user_id %}
+                        Blog Posted by- <a href='/your_blogs/{{user.user_id}}'>{{user.name}}</a>
+                    {% else %}
+                        Blog Posted by- <a href='/user_blogs/{{user_id}}/{{user.user_id}}'>{{user.name}}</a>
+                    {% endif %}
+                    <br>
+                    <img src="/static/{{i.image_path}}" width="460" height="345">
+                    <br>
+                    <br>
+                    <div class="kamal">{{ i.description }}</div>
+                    
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class ="col-md-4">
+            Side bar.
+            <a href="/dashboard/{{user_id}}/blog_upload" class="btn btn-success" role="button">Add blog</a>
+        </div>
+    </div> -->
+</div>
+</div>
+</body>
+<style>
+
+.jumbotron {
+  text-align: center;
+  /* <!--border: 3px solid green;--> */
+  height: 25vh
+}
+
+.kamal {
+  border: 1px solid gray;
+  padding: 8px;
+}
+</style>
+</html>
